@@ -16,13 +16,17 @@ document.addEventListener("DOMContentLoaded", function(){
             if(this.getAttribute("data-type") === "submit"){
                 alert("You clicked submit!");
             } else {
-                // otherwise setting the data-type as the gaem type
+                // otherwise setting the data-type as the game type
                 let gameType = this.getAttribute("data-type");
-                alert(`You clicked ${gameType}`);
+                // and calling runGame() with that game type
+                runGame(gameType);
             }
 
         });
     }
+
+    // event listener to make the addition game run as the default 
+    runGame("addition");
 
 })
 
@@ -37,11 +41,19 @@ document.addEventListener("DOMContentLoaded", function(){
  * Called when the game first loads
  * Creates two variables which contain a random number between 1 and 25
  */
-function runGame(){
+function runGame(gameType){
 
     // creating two variables which are random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
+
+    // checking the gameType and calling the appropriate function
+    if (gameType === "addition"){
+        displayAdditionQuestion(num1, num2);
+    } else {
+        alert(`Unknown game type: ${gameType}`);
+        throw `Unknown game type: ${gameType}. Program terminated.` // stops the loop and displays error message to the console for debugging
+    }
 
 }
 
@@ -66,8 +78,14 @@ function incrementWrongAnswers(){
 }
 
 // function for displaying the addition question
-function displayAdditionQuestion(){
+function displayAdditionQuestion(operand1, operand2){
+    // getting the operands from the html doc and assigning them the random numbers
+    document.getElementById("operand1").textContent = operand1;
+    document.getElementById("operand2").textContent = operand2;
+    // getting the operator and assigning it the relevant one for the gameType
+    document.getElementById("operator").textContent = '+';
     
+    return operand1 + operand2;
 }
 
 // function for displaying the subtract question
