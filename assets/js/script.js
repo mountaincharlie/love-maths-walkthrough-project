@@ -71,8 +71,12 @@ function checkAnswer(){
 
     // updating the score if they're correct or updating the wrong answer function
     if (isCorrect){
+        // calling the incrementScore() to update the user's score
+        incrementScore();
         alert(`You got it right!`);
     } else {
+        // calling the incrementWrongAnswers() to update the user's score
+        incrementWrongAnswers();
         alert(`Sorry ${userAnswer} is not right. The correct answer is: ${calculatedAnswer[0]}.`);
     }
 
@@ -95,7 +99,6 @@ function calculateCorrectAnswer(){
 
     if (operator === "+"){
         return [operand1 + operand2, "addition"];
-        console.log('calculateCorrectAnswer works')
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Function terminated`
@@ -103,14 +106,25 @@ function calculateCorrectAnswer(){
     
 }
 
-// function for calculating the user's score
+/**
+ * Called by checkAnswer() if the user is correct
+ * Reads current value from the DOM
+ * Adds one and updates the DOM
+ */
 function incrementScore(){
-    
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    // using the compound addition symbol prevents writing to the DOM before updating oldScore
+    document.getElementById("score").innerText = ++oldScore;
 }
 
-// function for counting the user's incorrect answers
+/**
+ * Called by checkAnswer() if the user is incorrect
+ * Reads current value from the DOM
+ * Adds one and updates the DOM
+ */
 function incrementWrongAnswers(){
-    
+    let wrongAnswerCount = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++wrongAnswerCount;
 }
 
 /**
