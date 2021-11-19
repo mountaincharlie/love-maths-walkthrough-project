@@ -4,10 +4,10 @@
 // get the button elements and add event listeners to them
 
 document.addEventListener("DOMContentLoaded", function(){
-    let buttons = document.getELementsByTagName("button"); // returns an array (html collection) of the buttons
+    let buttons = document.getElementsByTagName("button"); // returns an array (html collection) of the buttons
 
     // iterating through the buttons array by storing/using each value in buttons one per iteration (dont need indexing)
-    for (button in buttons){
+    for (let button of buttons){
 
         // ev-lis click function on each button
         button.addEventListener("click", function(){
