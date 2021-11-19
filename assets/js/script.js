@@ -32,9 +32,17 @@ document.addEventListener("DOMContentLoaded", function(){
 
 // --- FUNCTIONS ---
 
-// function for ...
+/**
+ * The main game loop
+ * Called when the game first loads
+ * Creates two variables which contain a random number between 1 and 25
+ */
 function runGame(){
-    
+
+    // creating two variables which are random numbers between 1 and 25
+    let num1 = Math.floor(Math.random() * 25) + 1;
+    let num2 = Math.floor(Math.random() * 25) + 1;
+
 }
 
 // function for checking the user's answer
