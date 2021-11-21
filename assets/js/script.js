@@ -22,9 +22,16 @@ document.addEventListener("DOMContentLoaded", function(){
                 // and calling runGame() with that game type
                 runGame(gameType);
             }
-
         });
     }
+
+    // event listener to allow the user to use 'enter' to submit the answer
+    document.getElementById('answer-box').addEventListener('keydown', function(event){
+        
+        if (event.key === "Enter"){
+            checkAnswer();
+        }
+    })
 
     // event listener to make the addition game run as the default 
     runGame("addition");
@@ -42,6 +49,11 @@ document.addEventListener("DOMContentLoaded", function(){
  * Creates two variables which contain a random number between 1 and 25
  */
 function runGame(gameType){
+
+    // emptying the answer box everytime the user 
+    document.getElementById('answer-box').value = '';
+    // setting the focus so that the curser is in the answer box everytime the page refreshes
+    document.getElementById('answer-box').focus();
 
     // creating two variables which are random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
