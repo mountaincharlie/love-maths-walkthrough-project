@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     // event listener to allow the user to use 'enter' to submit the answer
     document.getElementById('answer-box').addEventListener('keydown', function(event){
-        
+
         if (event.key === "Enter"){
             checkAnswer();
         }
@@ -66,6 +66,8 @@ function runGame(gameType){
         displayMultiplyQuestion(num1, num2);
     } else if (gameType === "subtract"){
         displaySubtractQuestion(num1, num2);
+    } else if (gameType === "divide"){
+        displayDivideQuestion(num1, num2);
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Program terminated.` // stops the loop and displays error message to the console for debugging
@@ -122,6 +124,8 @@ function calculateCorrectAnswer(){
         return [operand1 * operand2, "multiply"]; 
     } else if (operator === "-"){
         return [operand1 - operand2, "subtract"]; 
+    } else if (operator === "/"){
+        return [operand1 / operand2, "divide"]; 
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Function terminated`
@@ -200,5 +204,19 @@ function displayMultiplyQuestion(operand1, operand2){
     document.getElementById("operator").textContent = 'x';
 }
 
-// TO COMPLETE - function for displaying the divide question
-// function displayDivideQuestion(){}
+/**
+ * Divide game function
+ * @param {*first random number between 1 and 25} operand1 
+ * @param {*second random number between 1 and 25} operand2 
+ * Gets the operands from the html doc and assigning them the random numbers
+ * Gets the operator and assigns it the relevant one for the gameType
+ * Displays the operands and operator to the user 
+ */
+function displayDivideQuestion(operand1, operand2){
+
+    // setting operand1 as the multiplication of op1 and op2
+    document.getElementById("operand1").textContent = operand1 * operand2;
+    document.getElementById("operand2").textContent = operand2;
+    document.getElementById("operator").textContent = '/';
+
+}
