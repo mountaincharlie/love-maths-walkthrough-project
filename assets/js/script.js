@@ -50,6 +50,8 @@ function runGame(gameType){
     // checking the gameType and calling the appropriate function
     if (gameType === "addition"){
         displayAdditionQuestion(num1, num2);
+    } else if (gameType === "multiply"){
+        displayMultiplyQuestion(num1, num2);
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Program terminated.` // stops the loop and displays error message to the console for debugging
@@ -99,6 +101,8 @@ function calculateCorrectAnswer(){
 
     if (operator === "+"){
         return [operand1 + operand2, "addition"];
+    } else if (operator === "x"){
+        return [operand1 * operand2, "multiply"]; 
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Function terminated`
@@ -142,13 +146,22 @@ function displayAdditionQuestion(operand1, operand2){
 }
 
 // function for displaying the subtract question
-function displaySubtractQuestion(){
+function displaySubtractQuestion(operand1, operand2){
     
 }
 
-// function for displaying the multiply question
-function displayMultiplyQuestion(){
-    
+/**
+ * Multiply game function
+ * @param {*first random number between 1 and 25} operand1 
+ * @param {*second random number between 1 and 25} operand2 
+ * Displays the operands and operator to the user 
+ */
+function displayMultiplyQuestion(operand1, operand2){
+    // getting the operands from the html doc and assigning them the random numbers
+    document.getElementById("operand1").textContent = operand1;
+    document.getElementById("operand2").textContent = operand2;
+    // getting the operator and assigning it the relevant one for the gameType
+    document.getElementById("operator").textContent = 'x';
 }
 
 // TO COMPLETE - function for displaying the divide question
