@@ -52,6 +52,8 @@ function runGame(gameType){
         displayAdditionQuestion(num1, num2);
     } else if (gameType === "multiply"){
         displayMultiplyQuestion(num1, num2);
+    } else if (gameType === "subtract"){
+        displaySubtractQuestion(num1, num2);
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Program terminated.` // stops the loop and displays error message to the console for debugging
@@ -88,9 +90,12 @@ function checkAnswer(){
 }
 
 /**
+ * Correct answer calculation function
  * Gets the operands (the numbers) and the operator (plus, minus etc...)
  * directly from the DOM
- * Returns the correct answer
+ * Returns an array containing the correct answer and the game type 
+ * (inorder for runGame() to continue with that game type until the user
+ * chooses another game)
  */
 function calculateCorrectAnswer(){
     // getting the operands innerText and converting them into integers 
@@ -103,6 +108,8 @@ function calculateCorrectAnswer(){
         return [operand1 + operand2, "addition"];
     } else if (operator === "x"){
         return [operand1 * operand2, "multiply"]; 
+    } else if (operator === "-"){
+        return [operand1 - operand2, "subtract"]; 
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Function terminated`
@@ -135,32 +142,49 @@ function incrementWrongAnswers(){
  * Addition game function
  * @param {*first random number between 1 and 25} operand1 
  * @param {*second random number between 1 and 25} operand2 
- * Displays the operands and operator to the user 
+ * Gets the operands from the html doc and assigning them the random numbers
+ * Gets the operator and assigns it the relevant one for the gameType
+ * Displays the operands and operator to the user  
  */
 function displayAdditionQuestion(operand1, operand2){
-    // getting the operands from the html doc and assigning them the random numbers
+    
     document.getElementById("operand1").textContent = operand1;
     document.getElementById("operand2").textContent = operand2;
-    // getting the operator and assigning it the relevant one for the gameType
     document.getElementById("operator").textContent = '+';
 }
 
-// function for displaying the subtract question
+/**
+ * Subtract game function
+ * @param {*first random number between 1 and 25} operand1 
+ * @param {*second random number between 1 and 25} operand2 
+ * Gets the operands from the html doc and assigning them the random numbers
+ * Gets the operator and assigns it the relevant one for the gameType
+ * Displays the operands and operator to the user 
+ */
 function displaySubtractQuestion(operand1, operand2){
-    
+
+    // version which makes operand1 have to be bigger than operand2 if you dont want -ve answers
+    // document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2;
+    // document.getElementById("operand2").textContent = operand1 > operand2 ? operand2 : operand1;  
+
+    // to allow for -ve answers
+    document.getElementById("operand1").textContent = operand1;
+    document.getElementById("operand2").textContent = operand2;
+    document.getElementById("operator").textContent = '-';
 }
 
 /**
  * Multiply game function
  * @param {*first random number between 1 and 25} operand1 
  * @param {*second random number between 1 and 25} operand2 
- * Displays the operands and operator to the user 
+ * Gets the operands from the html doc and assigning them the random numbers
+ * Gets the operator and assigns it the relevant one for the gameType
+ * Displays the operands and operator to the user  
  */
 function displayMultiplyQuestion(operand1, operand2){
-    // getting the operands from the html doc and assigning them the random numbers
+
     document.getElementById("operand1").textContent = operand1;
     document.getElementById("operand2").textContent = operand2;
-    // getting the operator and assigning it the relevant one for the gameType
     document.getElementById("operator").textContent = 'x';
 }
 
